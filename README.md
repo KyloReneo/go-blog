@@ -4,6 +4,7 @@ A simple blog using Gin and MySQL
 
 Directories description:
 assets:
+
 -------Include all assets of the project like styles, images, logos and etc.
 cmd:
 -------Include all commandline files like migrate, serve and etc.
