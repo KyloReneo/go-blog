@@ -2,7 +2,7 @@
 #make git msg="your commit message"
 git:
 	git add .
-	git commit -m "$msg"
+	git commit -m "$m"
 	git push
 
 #Start the project manually
