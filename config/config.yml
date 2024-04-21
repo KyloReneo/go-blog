@@ -1,0 +1,9 @@
+#This is a template for describing structure of the config file
+#Set the values and add this file to .gitignore for real world projects
+
+app:
+  name: "Go-Blog"
+
+server:
+  host: "localhost"
+  port: "8080"
