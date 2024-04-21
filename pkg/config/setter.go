@@ -7,9 +7,9 @@ import (
 	"github.com/spf13/viper"
 
 	"github.com/kyloReneo/go-blog/config"
-
 )
 
+// Set config variables and unmarshal them
 func Set() {
 	viper.SetConfigName("config") //Name of config file
 	viper.SetConfigType("yml")    //Extention of the config file
