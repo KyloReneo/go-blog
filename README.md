@@ -2,24 +2,30 @@
 
 A simple blog using Gin and MySQL
 
-Directories description:
+# Directories description:
 
-assets:
+- ## assets:
 
--------Include all assets of the project like styles, images, logos and etc.
+  Include all assets of the project like styles, images, logos and etc.
 
-cmd:
+- ## cmd:
 
--------Include all commandline files like migrate, serve and etc.
+  Include all commandline files like migrate, serve and etc.
 
-config:
+- ## config:
 
--------Configuration files for the app.
+  Configuration files for the app.
 
-internal:
+- ## internal:
 
--------Include core app files like modules and helpers and any internal files.
+  Include core app files like modules and helpers and any internal files.
 
-pkg:
+- ## pkg:
 
--------Include custom packages developed for this project.
+  Include custom packages developed for this project.
+#
+# How to run:
+  - ## run manually:
+        make start
+  - ## run in developer mode:
+        make developer mode
