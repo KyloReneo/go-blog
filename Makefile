@@ -5,12 +5,17 @@ git:
 	git commit -m "$m"
 	git push
 
+#Display help options and discriptions
+#make help
+help:
+	go run main.go help
+
 #Start the project manually
 #make start
 start:
-	go run main.go
+	go run main.go serve
 
 #For runing the current program in a developer mode and make changes
 #make developer mode
 developer mode:
-	CompileDaemon -command="./go-blog"
+	CompileDaemon -command="go run main.go serve"
