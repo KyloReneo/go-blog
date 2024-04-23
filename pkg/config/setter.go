@@ -1,12 +1,9 @@
 package config
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/spf13/viper"
-
-	"github.com/kyloReneo/go-blog/config"
 )
 
 // Set config variables and unmarshal them
@@ -25,12 +22,10 @@ func Set() {
 		}
 	}
 
-	var configs config.Config
-
 	//Unmarshal all values to struct
 	err := viper.Unmarshal(&configurations)
 	if err != nil {
 		log.Fatal("Unable to decode configs into struct")
 	}
-	fmt.Printf("Unmarshaled config file:\n%v", configs)
+
 }
