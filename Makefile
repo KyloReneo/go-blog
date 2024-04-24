@@ -19,3 +19,8 @@ start:
 #make developer mode
 developer mode:
 	CompileDaemon -command="go run main.go serve"
+
+#Runs the Migration process
+#make migrate
+migrate:
+	go run main.go migrate
