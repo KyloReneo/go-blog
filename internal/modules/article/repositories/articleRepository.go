@@ -1,5 +1,6 @@
 package repositories
 
+//Abstraction layer between data access layer and service layer
 import (
 	"gorm.io/gorm"
 

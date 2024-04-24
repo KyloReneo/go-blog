@@ -1,9 +1,11 @@
 package models
 
+//Data access layer
 import (
 	"gorm.io/gorm"
 
 	"github.com/kyloReneo/go-blog/internal/modules/user/models"
+
 )
 
 type Article struct {
