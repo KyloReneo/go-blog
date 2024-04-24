@@ -12,7 +12,7 @@ func init() {
 var seedCmd = &cobra.Command{
 	Use:   "seed",
 	Short: "Database seeder",
-	Long:  `Creates Random seed for database table context.`,
+	Long:  `Creates random seed for database table context.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		Seed()
 	},

@@ -24,3 +24,8 @@ developer mode:
 #make migrate
 migrate:
 	go run main.go migrate
+
+#Runs the database seeder
+#make seed
+seed:
+	go run main.go seed
