@@ -5,6 +5,7 @@ import (
 
 	articleModel "github.com/kyloReneo/go-blog/internal/modules/article/models"
 	userResponse "github.com/kyloReneo/go-blog/internal/modules/user/responses"
+
 )
 
 // Response structure for the article responses
@@ -33,5 +34,6 @@ func ToArticle(article articleModel.Article) Article {
 			article.CreatedAt.Month(),
 			article.CreatedAt.Day()),
 		Image: "/assets/img/demopic/10.jpg",
+		User:  userResponse.ToUser(article.User),
 	}
 }
