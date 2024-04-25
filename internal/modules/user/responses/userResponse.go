@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	userModel "github.com/kyloReneo/go-blog/internal/modules/user/models"
+
 )
 
 // Response structure for the user responses
@@ -25,6 +26,6 @@ func ToUser(user userModel.User) User {
 		ID:    user.ID,
 		Name:  user.Name,
 		Email: user.Email,
-		Image: fmt.Sprintf("https://ui-avatar.com/api/?name=%s", user.Name),
+		Image: fmt.Sprintf("https://ui-avatars.com/api/?name=%s", user.Name),
 	}
 }
