@@ -20,7 +20,7 @@ type Article struct {
 
 // Structure for return bunch of Articles
 type Articles struct {
-	Data []Articles
+	Data []Article
 }
 
 // Recives the model object and transforms it to response object
@@ -36,4 +36,14 @@ func ToArticle(article articleModel.Article) Article {
 		Image: "/assets/img/demopic/10.jpg",
 		User:  userResponse.ToUser(article.User),
 	}
+}
+
+func ToUsers(articles []articleModel.Article) Articles {
+	var response Articles
+
+	for _, article := range articles {
+		response.Data = append(response.Data, ToArticle(article))
+	}
+
+	return response
 }
