@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	ArticleService "github.com/kyloReneo/go-blog/internal/modules/article/services"
+	"github.com/kyloReneo/go-blog/pkg/html"
 
 )
 
@@ -20,11 +21,15 @@ func New() *Controller {
 	}
 }
 
-// Creates a handler function for returning the gin context
-func (controller *Controller) Show(ctx *gin.Context) {
+// Create a handler function for returning the gin context
+func (controller *Controller) Index(ctx *gin.Context) {
 
-	ctx.JSON(http.StatusOK, gin.H{
-		"Message": "controller is Ok.",
+	html.Render(ctx, http.StatusOK, "../html/home", gin.H{
+		"title": "Home Page",
+		"featured": controller.articleService.GetFeaturedArticles(),
+		"stories":  controller.articleService.GetStoriesArticles(),
 	})
+
+	
 
 }
