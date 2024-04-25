@@ -1,8 +1,9 @@
 package services
 
 import (
-	ArticleModel "github.com/kyloReneo/go-blog/internal/modules/article/models"
 	ArticleRepository "github.com/kyloReneo/go-blog/internal/modules/article/repositories"
+	ArticleResponse "github.com/kyloReneo/go-blog/internal/modules/article/responses"
+
 )
 
 type ArticleSercive struct {
@@ -15,10 +16,12 @@ func New() *ArticleSercive {
 	}
 }
 
-func (articleService *ArticleSercive) GetFeaturedArticles() []ArticleModel.Article {
-	return articleService.articleRepository.List(4)
+func (articleService *ArticleSercive) GetFeaturedArticles() ArticleResponse.Articles {
+	articles := articleService.articleRepository.List(4)
+	return ArticleResponse.ToArticles(articles)
 }
 
-func (articleService *ArticleSercive) GetStoriesArticles() []ArticleModel.Article {
-	return articleService.articleRepository.List(6)
+func (articleService *ArticleSercive) GetStoriesArticles() ArticleResponse.Articles {
+	articles := articleService.articleRepository.List(6)
+	return ArticleResponse.ToArticles(articles)
 }
