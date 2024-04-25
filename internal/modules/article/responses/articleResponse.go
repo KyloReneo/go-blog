@@ -5,7 +5,6 @@ import (
 
 	articleModel "github.com/kyloReneo/go-blog/internal/modules/article/models"
 	userResponse "github.com/kyloReneo/go-blog/internal/modules/user/responses"
-
 )
 
 // Response structure for the article responses
@@ -38,7 +37,7 @@ func ToArticle(article articleModel.Article) Article {
 	}
 }
 
-func ToUsers(articles []articleModel.Article) Articles {
+func ToArticles(articles []articleModel.Article) Articles {
 	var response Articles
 
 	for _, article := range articles {
