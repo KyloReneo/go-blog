@@ -1,6 +1,7 @@
 package services
 
-//Service layer on repository layer
+//Business Logic layer on repository layer
+//This is an intermediate between the Presentation Layer and the Data Access Layer
 import ArticleModel "github.com/kyloReneo/go-blog/internal/modules/article/models"
 
 type ArticleServiceInterface interface {

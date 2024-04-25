@@ -2,6 +2,7 @@ package models
 
 import "gorm.io/gorm"
 
+//User Data Access Layer
 type User struct {
 	gorm.Model
 	Name     string `gorm:"varchar:191"`
