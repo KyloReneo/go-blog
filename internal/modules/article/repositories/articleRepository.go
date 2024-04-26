@@ -6,7 +6,6 @@ import (
 
 	articleModel "github.com/kyloReneo/go-blog/internal/modules/article/models"
 	"github.com/kyloReneo/go-blog/pkg/database"
-
 )
 
 // Article Repository struct that is made of gorm.DB
@@ -28,4 +27,13 @@ func (articleRepository *ArticleRepository) List(limit int) []articleModel.Artic
 	articleRepository.DB.Limit(limit).Joins("User").Order("rand()").Find(&articles)
 
 	return articles
+}
+
+// Finds the requested id's article
+func (articleRepository *ArticleRepository) Find(id int) articleModel.Article {
+	var article articleModel.Article
+
+	articleRepository.DB.Joins("User").Find(&article, id)
+
+	return article
 }
