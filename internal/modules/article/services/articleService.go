@@ -1,6 +1,8 @@
 package services
 
 import (
+	"errors"
+
 	ArticleRepository "github.com/kyloReneo/go-blog/internal/modules/article/repositories"
 	ArticleResponse "github.com/kyloReneo/go-blog/internal/modules/article/responses"
 
@@ -24,4 +26,14 @@ func (articleService *ArticleSercive) GetFeaturedArticles() ArticleResponse.Arti
 func (articleService *ArticleSercive) GetStoriesArticles() ArticleResponse.Articles {
 	articles := articleService.articleRepository.List(6)
 	return ArticleResponse.ToArticles(articles)
+}
+
+func (articleService *ArticleSercive) Find(id int) (ArticleResponse.Article, error) {
+	var response ArticleResponse.Article
+	article := articleService.articleRepository.Find(id)
+	if article.ID == 0 {
+		return response, errors.New("article not found")
+	}
+	return ArticleResponse.ToArticle(article), nil
+
 }
