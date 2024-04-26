@@ -8,7 +8,6 @@ import (
 
 	ArticleService "github.com/kyloReneo/go-blog/internal/modules/article/services"
 	"github.com/kyloReneo/go-blog/pkg/html"
-
 )
 
 // Define a controller type struct and a function that returns a Controller instance
@@ -53,13 +52,9 @@ func (controller *Controller) Show(ctx *gin.Context) {
 
 	}
 
-	//render the article template
-	ctx.JSON(http.StatusOK, gin.H{
-		"article": article,
-	})
 	html.Render(ctx,
 		http.StatusOK,
-		"modules/article/html/show",
+		"../../article/html/show",
 		gin.H{
 			"title":   "Show article",
 			"article": article,
