@@ -8,6 +8,7 @@ import (
 
 	ArticleService "github.com/kyloReneo/go-blog/internal/modules/article/services"
 	"github.com/kyloReneo/go-blog/pkg/html"
+
 )
 
 // Define a controller type struct and a function that returns a Controller instance
@@ -29,10 +30,10 @@ func (controller *Controller) Show(ctx *gin.Context) {
 	if err != nil {
 		html.Render(ctx,
 			http.StatusInternalServerError,
-			"/templates/errors/html/500",
+			"../../../templates/errors/html/500",
 			gin.H{
 				"title":   "Internal error",
-				"Message": "Converting id error",
+				"message": "Converting id error",
 			})
 		return
 	}
@@ -43,10 +44,10 @@ func (controller *Controller) Show(ctx *gin.Context) {
 	if err != nil {
 		html.Render(ctx,
 			http.StatusNotFound,
-			"/templates/errors/html/404",
+			"../../../templates/errors/html/404",
 			gin.H{
 				"title":   "Page not found",
-				"Message": err.Error(),
+				"message": err.Error(),
 			})
 		return
 
@@ -56,5 +57,12 @@ func (controller *Controller) Show(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{
 		"article": article,
 	})
+	html.Render(ctx,
+		http.StatusOK,
+		"modules/article/html/show",
+		gin.H{
+			"title":   "Show article",
+			"article": article,
+		})
 
 }

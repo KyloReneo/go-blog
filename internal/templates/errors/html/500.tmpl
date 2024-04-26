@@ -1,0 +1,42 @@
+{{ define "../../../templates/errors/html/500" }}
+
+{{template "templates/layouts/html/head" .}}
+
+<!-- Begin Nav
+================================================== -->
+{{template "templates/layouts/html/navbar" .}}
+<!-- End Nav
+================================================== -->
+
+<!-- Begin Site Title
+================================================== -->
+{{template "templates/layouts/html/header" .}}
+<!-- End Site Title
+================================================== -->
+
+<!-- Begin Page Body
+================================================== -->
+
+<div class="col-12">
+    <h1>{{ .title }}</h1>
+    <p>{{ .message  }}</p>
+
+</div>
+
+<!-- End Page Body
+================================================== -->	
+
+<!-- Begin Footer
+================================================== -->
+{{template "templates/layouts/html/footer" .}}
+<!-- End Footer
+================================================== -->
+
+
+
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+{{template "templates/layouts/html/foot" .}}
+
+{{ end }}
