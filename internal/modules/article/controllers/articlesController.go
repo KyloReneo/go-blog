@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	ArticleService "github.com/kyloReneo/go-blog/internal/modules/article/services"
+
 )
 
 // Define a controller type struct and a function that returns a Controller instance
@@ -28,20 +29,23 @@ func (controller *Controller) Show(ctx *gin.Context) {
 	if err != nil {
 		ctx.JSON(http.StatusUnprocessableEntity, gin.H{
 			"Error": "Somthing went wrong with converting the id.",
-		})
-	} else {
-		ctx.JSON(http.StatusOK, gin.H{
-			"Message": id,
-		})
-	}
-	//Find the article in the database
+		}) 
+		return
+	} 
 
+	//Find the article in the database
+	article, err := controller.articleService.Find(id)
 	//Show error page if the article is not found
+	if err != nil {
+		ctx.JSON(http.StatusNotFound, gin.H{
+			"Error": err.Error(),
+		})
+		return
+	} 
 
 	//render the article template
-
 	ctx.JSON(http.StatusOK, gin.H{
-		"Message": "controller is Ok.",
+		"article" : article,
 	})
 
 }
