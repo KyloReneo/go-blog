@@ -9,6 +9,7 @@ import (
 	userRepository "github.com/kyloReneo/go-blog/internal/modules/user/repositories"
 	"github.com/kyloReneo/go-blog/internal/modules/user/requests/auth"
 	userResponse "github.com/kyloReneo/go-blog/internal/modules/user/responses"
+
 )
 
 type UserSercive struct {
@@ -31,7 +32,7 @@ func (userService *UserSercive) Create(request auth.RegisterRequest) (userRespon
 	}
 
 	user.Name = request.Name
-	user.Email = request.Password
+	user.Email = request.Email
 	user.Password = string(hasedPassword)
 
 	newUser := userService.userRepository.Create(user)

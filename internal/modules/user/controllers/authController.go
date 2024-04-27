@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -9,7 +10,6 @@ import (
 	"github.com/kyloReneo/go-blog/internal/modules/user/requests/auth"
 	userService "github.com/kyloReneo/go-blog/internal/modules/user/services"
 	"github.com/kyloReneo/go-blog/pkg/html"
-
 )
 
 // Define a controller type struct and a function that returns a Controller instance
@@ -42,7 +42,7 @@ func (controller *Controller) HandleRegister(ctx *gin.Context) {
 
 	// Create the user
 	user, err := controller.userSercive.Create(request)
-
+	fmt.Printf(user.Email)
 	// Check if there is any error on the user creation
 	if err != nil {
 		ctx.Redirect(http.StatusFound, "/register")
@@ -50,6 +50,7 @@ func (controller *Controller) HandleRegister(ctx *gin.Context) {
 	}
 
 	// After creating the user redirects to the home page
-	log.Printf("The user with name %s created successfully.\n", user.Name)
+	fmt.Println("-----------------------------------------------------------")
+	log.Printf("The user with %s Email created successfully.\n", user.Email)
 	ctx.Redirect(http.StatusFound, "/")
 }
