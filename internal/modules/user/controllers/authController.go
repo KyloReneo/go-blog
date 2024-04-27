@@ -7,7 +7,6 @@ import (
 
 	"github.com/kyloReneo/go-blog/internal/modules/user/requests/auth"
 	"github.com/kyloReneo/go-blog/pkg/html"
-
 )
 
 // Define a controller type struct and a function that returns a Controller instance
