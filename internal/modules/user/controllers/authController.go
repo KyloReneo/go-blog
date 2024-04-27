@@ -9,6 +9,7 @@ import (
 
 	"github.com/kyloReneo/go-blog/internal/modules/user/requests/auth"
 	userService "github.com/kyloReneo/go-blog/internal/modules/user/services"
+	"github.com/kyloReneo/go-blog/pkg/errors"
 	"github.com/kyloReneo/go-blog/pkg/html"
 )
 
@@ -34,9 +35,15 @@ func (controller *Controller) HandleRegister(ctx *gin.Context) {
 
 	// Validate the request
 	var request auth.RegisterRequest
+
 	// This will infer what binder to use depending on the content-type header.
 	if err := ctx.ShouldBind(&request); err != nil {
-		ctx.Redirect(http.StatusFound, "/register")
+		errors.Init()
+		errors.SetFromErrors(err)
+
+		ctx.JSON(http.StatusFound, gin.H{
+			"errors": errors.Get(),
+		})
 		return
 	}
 
