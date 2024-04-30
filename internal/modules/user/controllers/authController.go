@@ -14,6 +14,7 @@ import (
 	"github.com/kyloReneo/go-blog/pkg/html"
 	"github.com/kyloReneo/go-blog/pkg/old"
 	"github.com/kyloReneo/go-blog/pkg/sessions"
+
 )
 
 // Define a controller type struct and a function that returns a Controller instance
@@ -114,4 +115,23 @@ func (controller *Controller) HandleLogin(ctx *gin.Context) {
 		ctx.Redirect(http.StatusFound, "/login")
 		return
 	}
+
+	user, err := controller.userSercive.HandleUsersLogin(request)
+	if err != nil {
+		errors.Init()
+		errors.Add("email", err.Error())
+		sessions.Set(ctx, "errors", converters.MapToString(errors.Get()))
+
+		old.Init()
+		old.Set(ctx)
+		sessions.Set(ctx, "old", converters.UrlValuesToString(old.Get()))
+
+		ctx.Redirect(http.StatusFound, "/login")
+		return
+	}
+	sessions.Set(ctx, "auth", strconv.Itoa(int(user.ID)))
+
+	// After login the user redirects to the home page
+	log.Printf("The user with %s Email logded in successfully.\n", user.Email)
+	ctx.Redirect(http.StatusFound, "/")
 }

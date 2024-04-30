@@ -61,7 +61,7 @@ func (userService *UserSercive) HandleUsersLogin(request auth.LoginRequest) (use
 	// Check if the inserted password is vaid
 	err := bcrypt.CompareHashAndPassword([]byte(existsUser.Password), []byte(request.Password))
 	if err != nil {
-		return response, errors.New("nvalid credentials")
+		return response, errors.New("invalid credentials")
 	}
 
 	return userResponse.ToUser(existsUser), nil
