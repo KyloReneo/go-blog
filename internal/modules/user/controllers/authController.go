@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 
@@ -55,6 +56,19 @@ func (controller *Controller) HandleRegister(ctx *gin.Context) {
 		return
 	}
 
+	if controller.userSercive.CheckUserExists(request.Email) {
+		errors.Init()
+		errors.Add("Email", "Email address already exists")
+		sessions.Set(ctx, "errors", converters.MapToString(errors.Get()))
+
+		old.Init()
+		old.Set(ctx)
+		sessions.Set(ctx, "old", converters.UrlValuesToString(old.Get()))
+
+		ctx.Redirect(http.StatusFound, "/register")
+		return
+	}
+
 	// Create the user
 	user, err := controller.userSercive.Create(request)
 
@@ -63,6 +77,8 @@ func (controller *Controller) HandleRegister(ctx *gin.Context) {
 		ctx.Redirect(http.StatusFound, "/register")
 		return
 	}
+
+	sessions.Set(ctx, "auth", strconv.Itoa(int(user.ID)))
 
 	// After creating the user redirects to the home page
 	fmt.Println("-----------------------------------------------------------")

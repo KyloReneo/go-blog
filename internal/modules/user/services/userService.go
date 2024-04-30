@@ -42,3 +42,14 @@ func (userService *UserSercive) Create(request auth.RegisterRequest) (userRespon
 	return userResponse.ToUser(newUser), nil
 
 }
+
+func (userService *UserSercive) CheckUserExists(email string) bool {
+	user := userService.userRepository.FindByEmail(email)
+
+	if user.ID != 0 {
+		return true
+	}
+
+	return false
+
+}

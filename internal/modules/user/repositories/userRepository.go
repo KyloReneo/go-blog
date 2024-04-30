@@ -6,6 +6,7 @@ import (
 
 	userModel "github.com/kyloReneo/go-blog/internal/modules/user/models"
 	"github.com/kyloReneo/go-blog/pkg/database"
+
 )
 
 // Article Repository struct that is made of gorm.DB
@@ -27,4 +28,13 @@ func (userRepository *UserRepository) Create(user userModel.User) userModel.User
 	userRepository.DB.Create(&user).Scan(&newUser)
 
 	return newUser
+}
+
+// Finds the user by email and returns the record as a user model response
+func (userRepository *UserRepository) FindByEmail(email string) userModel.User {
+	var user userModel.User
+
+	userRepository.DB.First(&user, "email = ?", email)
+
+	return user
 }
