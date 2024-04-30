@@ -14,7 +14,6 @@ import (
 	"github.com/kyloReneo/go-blog/pkg/html"
 	"github.com/kyloReneo/go-blog/pkg/old"
 	"github.com/kyloReneo/go-blog/pkg/sessions"
-
 )
 
 // Define a controller type struct and a function that returns a Controller instance
@@ -97,5 +96,4 @@ func (controller *Controller) Login(ctx *gin.Context) {
 // A handler function for POST the "/login" requestes
 func (controller *Controller) HandleLogin(ctx *gin.Context) {
 
-	
 }

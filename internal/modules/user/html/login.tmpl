@@ -1,0 +1,65 @@
+{{ define "../../user/html/login" }}
+
+{{template "templates/layouts/html/head" .}}
+
+<!-- Begin Nav
+================================================== -->
+{{template "templates/layouts/html/navbar" .}}
+<!-- End Nav
+================================================== -->
+
+<!-- Begin Site Title
+================================================== -->
+{{template "templates/layouts/html/header" .}}
+<!-- End Site Title
+================================================== -->
+
+
+
+<!-- Begin Form
+	================================================== -->
+	<div class="col-md-12 col-md-offset-2 col-xs-12">
+		<div class="auth">
+			<div class="auth-triangle"></div>
+
+			<h2 class="auth-header">login</h2>
+
+			<form class="auth-container" method="POST" action="/login">
+				<p>
+					<label for="email">Email</label>
+					<input type="email" id="email" name="email" placeholder="Email" value="{{ range .OLD.email }}{{.}}{{end}}">
+					<span class="text-danger">{{ .ERRORS.email }}</span>
+				</p>
+				<p>
+					<label for="password">Password</label>
+					<input type="password" id="password" name="password" placeholder="Password">
+					<span class="text-danger">{{ .ERRORS.password }}</span>
+				</p>
+				<p><button type="submit">Login</button></p>
+			</form>
+			<p class="text-center">Or <a href="/register">Register</a></p>
+		</div>
+	</div>
+<!-- End Form
+================================================== -->
+
+
+
+
+
+
+
+<!-- Begin Footer
+================================================== -->
+{{template "templates/layouts/html/footer" .}}
+<!-- End Footer
+================================================== -->
+
+
+
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+{{template "templates/layouts/html/foot" .}}
+
+{{ end }}
