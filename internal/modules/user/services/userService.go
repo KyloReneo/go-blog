@@ -9,7 +9,6 @@ import (
 	userRepository "github.com/kyloReneo/go-blog/internal/modules/user/repositories"
 	"github.com/kyloReneo/go-blog/internal/modules/user/requests/auth"
 	userResponse "github.com/kyloReneo/go-blog/internal/modules/user/responses"
-
 )
 
 type UserSercive struct {
@@ -46,10 +45,24 @@ func (userService *UserSercive) Create(request auth.RegisterRequest) (userRespon
 func (userService *UserSercive) CheckUserExists(email string) bool {
 	user := userService.userRepository.FindByEmail(email)
 
-	if user.ID != 0 {
-		return true
+	return user.ID != 0
+}
+
+func (userService *UserSercive) HandleUsersLogin(request auth.LoginRequest) (userResponse.User, error) {
+
+	var response userResponse.User
+	existsUser := userService.userRepository.FindByEmail(request.Email)
+
+	// Check if the inserted email is valid
+	if existsUser.ID == 0 {
+		return response, errors.New("invalid credentials")
 	}
 
-	return false
+	// Check if the inserted password is vaid
+	err := bcrypt.CompareHashAndPassword([]byte(existsUser.Password), []byte(request.Password))
+	if err != nil {
+		return response, errors.New("nvalid credentials")
+	}
 
+	return userResponse.ToUser(existsUser), nil
 }

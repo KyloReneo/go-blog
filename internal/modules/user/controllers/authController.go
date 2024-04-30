@@ -96,4 +96,22 @@ func (controller *Controller) Login(ctx *gin.Context) {
 // A handler function for POST the "/login" requestes
 func (controller *Controller) HandleLogin(ctx *gin.Context) {
 
+	// Validate the request
+	// Create an instance of binded login request
+	var request auth.LoginRequest
+
+	// This will infer what binder to use depending on the content-type header.
+	if err := ctx.ShouldBind(&request); err != nil {
+
+		errors.Init()
+		errors.SetFromErrors(err)
+		sessions.Set(ctx, "errors", converters.MapToString(errors.Get()))
+
+		old.Init()
+		old.Set(ctx)
+		sessions.Set(ctx, "old", converters.UrlValuesToString(old.Get()))
+
+		ctx.Redirect(http.StatusFound, "/login")
+		return
+	}
 }
