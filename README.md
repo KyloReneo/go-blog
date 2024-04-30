@@ -1,6 +1,6 @@
 # go-blog
 
-A simple blog using Gin and MySQL
+A simple blog made with Gin, Gorm and MySQ
 
 # Directories description:
 
