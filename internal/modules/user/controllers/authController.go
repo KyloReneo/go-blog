@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -32,7 +31,9 @@ func New() *Controller {
 // A handler function for GET the "/register" requestes
 func (controller *Controller) Register(ctx *gin.Context) {
 
-	html.Render(ctx, http.StatusOK, "../../user/html/register", gin.H{})
+	html.Render(ctx, http.StatusOK, "../../user/html/register", gin.H{
+		"title": "Register",
+	})
 }
 
 // A handler function for POST the "/register" requestes
@@ -81,7 +82,20 @@ func (controller *Controller) HandleRegister(ctx *gin.Context) {
 	sessions.Set(ctx, "auth", strconv.Itoa(int(user.ID)))
 
 	// After creating the user redirects to the home page
-	fmt.Println("-----------------------------------------------------------")
 	log.Printf("The user with %s Email created successfully.\n", user.Email)
 	ctx.Redirect(http.StatusFound, "/")
+}
+
+// A handler function for GET the "/login" requestes
+func (controller *Controller) Login(ctx *gin.Context) {
+
+	html.Render(ctx, http.StatusOK, "../../user/html/login", gin.H{
+		"title": "Login",
+	})
+}
+
+// A handler function for POST the "/login" requestes
+func (controller *Controller) HandleLogin(ctx *gin.Context) {
+
+	
 }
