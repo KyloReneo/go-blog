@@ -12,7 +12,9 @@ import (
 	"github.com/kyloReneo/go-blog/pkg/converters"
 	"github.com/kyloReneo/go-blog/pkg/errors"
 	"github.com/kyloReneo/go-blog/pkg/html"
+	"github.com/kyloReneo/go-blog/pkg/old"
 	"github.com/kyloReneo/go-blog/pkg/sessions"
+
 )
 
 // Define a controller type struct and a function that returns a Controller instance
@@ -43,8 +45,11 @@ func (controller *Controller) HandleRegister(ctx *gin.Context) {
 
 		errors.Init()
 		errors.SetFromErrors(err)
-
 		sessions.Set(ctx, "errors", converters.MapToString(errors.Get()))
+
+		old.Init()
+		old.Set(ctx)
+		sessions.Set(ctx, "old", converters.UrlValuesToString(old.Get()))
 
 		ctx.Redirect(http.StatusFound, "/register")
 		return
