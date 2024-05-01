@@ -14,7 +14,6 @@ import (
 	"github.com/kyloReneo/go-blog/pkg/html"
 	"github.com/kyloReneo/go-blog/pkg/old"
 	"github.com/kyloReneo/go-blog/pkg/sessions"
-
 )
 
 // Define a controller type struct and a function that returns a Controller instance
@@ -133,5 +132,10 @@ func (controller *Controller) HandleLogin(ctx *gin.Context) {
 
 	// After login the user redirects to the home page
 	log.Printf("The user with %s Email logded in successfully.\n", user.Email)
+	ctx.Redirect(http.StatusFound, "/")
+}
+
+func (controller *Controller) HandleLogout(ctx *gin.Context) {
+
 	ctx.Redirect(http.StatusFound, "/")
 }

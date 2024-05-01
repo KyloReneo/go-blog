@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	usrCtrl "github.com/kyloReneo/go-blog/internal/modules/user/controllers"
+
 )
 
 func Routes(router *gin.Engine) {
@@ -14,4 +15,6 @@ func Routes(router *gin.Engine) {
 
 	router.GET("/login", userController.Login)
 	router.POST("/login", userController.HandleLogin)
+
+	router.POST("/logout", userController.HandleLogout)
 }
