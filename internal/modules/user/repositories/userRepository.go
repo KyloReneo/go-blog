@@ -36,6 +36,8 @@ func (userRepository *UserRepository) FindByEmail(email string) userModel.User {
 
 	userRepository.DB.First(&user, "email = ?", email)
 
+	
+
 	return user
 }
 
@@ -43,7 +45,11 @@ func (userRepository *UserRepository) FindByEmail(email string) userModel.User {
 func (userRepository *UserRepository) FindByID(id int) userModel.User {
 	var user userModel.User
 
-	userRepository.DB.First(&user, "id = ?", id)
+	if id == 0 {
+		return user
+	} else {
+		userRepository.DB.First(&user, "id = ?", id)
+	}
 
 	return user
 }

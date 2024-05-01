@@ -9,6 +9,7 @@ import (
 	userRepository "github.com/kyloReneo/go-blog/internal/modules/user/repositories"
 	"github.com/kyloReneo/go-blog/internal/modules/user/requests/auth"
 	userResponse "github.com/kyloReneo/go-blog/internal/modules/user/responses"
+
 )
 
 type UserSercive struct {
@@ -55,7 +56,7 @@ func (userService *UserSercive) HandleUsersLogin(request auth.LoginRequest) (use
 
 	// Check if the inserted email is valid
 	if existsUser.ID == 0 {
-		return response, errors.New("invalid credentials, user not found")
+		return response, errors.New("invalid email, user not found")
 	}
 
 	// Check if the inserted password is vaid
