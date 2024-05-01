@@ -15,7 +15,7 @@
 		<ul class="navbar-nav ml-auto">
 			{{ if (eq .AUTH.ID 0) }}
 			<li class="nav-item active">
-				<a class="nav-link" href="/login">Login</a>
+				<a href="/login" class="nav-link">Login</a>
 			</li>
 			{{ else }}
 			<li class="nav-item dropdown">
@@ -30,7 +30,7 @@
 					<li>
 						<a href="#" onclick="$('#logout').submit()" class="nav-link">
 							Logout
-							<form action="#" method="POST" id="logout"></form>
+							<form action="/logout" method="POST" id="logout"></form>
 						</a>
 					</li>
 				</ul>

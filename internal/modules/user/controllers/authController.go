@@ -131,11 +131,12 @@ func (controller *Controller) HandleLogin(ctx *gin.Context) {
 	sessions.Set(ctx, "auth", strconv.Itoa(int(user.ID)))
 
 	// After login the user redirects to the home page
-	log.Printf("The user with %s Email logded in successfully.\n", user.Email)
+	log.Printf("The user with %s Email logged in successfully.\n", user.Email)
 	ctx.Redirect(http.StatusFound, "/")
 }
 
 func (controller *Controller) HandleLogout(ctx *gin.Context) {
 
+	sessions.Remove(ctx, "auth")
 	ctx.Redirect(http.StatusFound, "/")
 }
