@@ -7,4 +7,5 @@ type UserRepositoryInterface interface {
 	// Creates a user in database
 	Create(user userModel.User) userModel.User
 	FindByEmail(email string) userModel.User
+	FindByID(id uint) userModel.User
 }
