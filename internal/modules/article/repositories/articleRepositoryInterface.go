@@ -6,4 +6,5 @@ import articleModel "github.com/kyloReneo/go-blog/internal/modules/article/model
 type ArticleRepositoryInterface interface {
 	List(limit int) []articleModel.Article
 	Find(id int) articleModel.Article
+	Create(article articleModel.Article) articleModel.Article
 }

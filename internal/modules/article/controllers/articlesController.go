@@ -1,13 +1,20 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 
+	"github.com/kyloReneo/go-blog/internal/modules/article/requests/articles"
 	ArticleService "github.com/kyloReneo/go-blog/internal/modules/article/services"
+	"github.com/kyloReneo/go-blog/internal/modules/user/helpers"
+	"github.com/kyloReneo/go-blog/pkg/converters"
+	"github.com/kyloReneo/go-blog/pkg/errors"
 	"github.com/kyloReneo/go-blog/pkg/html"
+	"github.com/kyloReneo/go-blog/pkg/old"
+	"github.com/kyloReneo/go-blog/pkg/sessions"
 )
 
 // Define a controller type struct and a function that returns a Controller instance
@@ -74,5 +81,34 @@ func (controller *Controller) Create(ctx *gin.Context) {
 
 // Handler function for storing articles
 func (controller *Controller) Store(ctx *gin.Context) {
+	// Validate the request
+	var request articles.StoreRequest
 
+	// This will infer what binder to use depending on the content-type header.
+	if err := ctx.ShouldBind(&request); err != nil {
+
+		errors.Init()
+		errors.SetFromErrors(err)
+		sessions.Set(ctx, "errors", converters.MapToString(errors.Get()))
+
+		old.Init()
+		old.Set(ctx)
+		sessions.Set(ctx, "old", converters.UrlValuesToString(old.Get()))
+
+		ctx.Redirect(http.StatusFound, "/articles/create")
+		return
+	}
+
+	user := helpers.Auth(ctx)
+
+	// Create the article
+	article, err := controller.articleService.StoreAsUser(request, user)
+
+	// Check if there is any error on the article creation
+	if err != nil {
+		ctx.Redirect(http.StatusFound, "/articles/create")
+		return
+	}
+
+	ctx.Redirect(http.StatusFound, fmt.Sprintf("/articles/%d", article.ID))
 }

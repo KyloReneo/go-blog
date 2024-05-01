@@ -3,9 +3,11 @@ package services
 import (
 	"errors"
 
+	ArticleModel "github.com/kyloReneo/go-blog/internal/modules/article/models"
 	ArticleRepository "github.com/kyloReneo/go-blog/internal/modules/article/repositories"
+	"github.com/kyloReneo/go-blog/internal/modules/article/requests/articles"
 	ArticleResponse "github.com/kyloReneo/go-blog/internal/modules/article/responses"
-
+	UserResponse "github.com/kyloReneo/go-blog/internal/modules/user/responses"
 )
 
 type ArticleSercive struct {
@@ -36,4 +38,20 @@ func (articleService *ArticleSercive) Find(id int) (ArticleResponse.Article, err
 	}
 	return ArticleResponse.ToArticle(article), nil
 
+}
+
+func (articleService *ArticleSercive) StoreAsUser(request articles.StoreRequest, user UserResponse.User) (ArticleResponse.Article, error) {
+	var article ArticleModel.Article
+	var response ArticleResponse.Article
+
+	article.Title = request.Title
+	article.Content = request.Content
+	article.UserID = user.ID
+
+	newArticle := articleService.articleRepository.Create(article)
+	if newArticle.ID == 0 {
+		return response, errors.New("somthing went wrong when creating the article")
+	}
+
+	return ArticleResponse.ToArticle(newArticle), nil
 }

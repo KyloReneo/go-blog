@@ -37,3 +37,11 @@ func (articleRepository *ArticleRepository) Find(id int) articleModel.Article {
 
 	return article
 }
+
+func (articleRepository *ArticleRepository) Create(article articleModel.Article) articleModel.Article {
+
+	var newArticle articleModel.Article
+	articleRepository.DB.Create(&article).Scan(&newArticle)
+
+	return newArticle
+}
