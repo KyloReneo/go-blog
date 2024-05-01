@@ -55,13 +55,13 @@ func (userService *UserSercive) HandleUsersLogin(request auth.LoginRequest) (use
 
 	// Check if the inserted email is valid
 	if existsUser.ID == 0 {
-		return response, errors.New("invalid credentials")
+		return response, errors.New("invalid credentials, user not found")
 	}
 
 	// Check if the inserted password is vaid
 	err := bcrypt.CompareHashAndPassword([]byte(existsUser.Password), []byte(request.Password))
 	if err != nil {
-		return response, errors.New("invalid credentials")
+		return response, errors.New("invalid password")
 	}
 
 	return userResponse.ToUser(existsUser), nil
