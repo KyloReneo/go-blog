@@ -5,7 +5,6 @@ import (
 
 	"github.com/kyloReneo/go-blog/internal/middlewares"
 	articleCtrl "github.com/kyloReneo/go-blog/internal/modules/article/controllers"
-
 )
 
 func Routes(router *gin.Engine) {
@@ -17,6 +16,7 @@ func Routes(router *gin.Engine) {
 	authGroup.Use(middlewares.IsAuthenticated())
 	{
 		authGroup.GET("/create", articleController.Create)
+		authGroup.POST("/store", articleController.Store)
 	}
 
 }

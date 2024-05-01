@@ -64,5 +64,15 @@ func (controller *Controller) Show(ctx *gin.Context) {
 
 // Handler function for creating articles
 func (controller *Controller) Create(ctx *gin.Context) {
+	html.Render(ctx,
+		http.StatusOK,
+		"../../article/html/create",
+		gin.H{
+			"title": "Create article",
+		})
+}
+
+// Handler function for storing articles
+func (controller *Controller) Store(ctx *gin.Context) {
 
 }
